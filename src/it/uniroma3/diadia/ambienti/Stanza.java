@@ -161,14 +161,14 @@ public class Stanza {
 	 */
 	public boolean removeAttrezzo(Attrezzo attrezzo) {
 		if(attrezzo!=null) {
-			int posto=0;
+			int i=0;
 			for(Attrezzo att : this.attrezzi) {
 				if(att!=null) {
 					if(att.getNome().equals(attrezzo.getNome())) {
-						this.attrezzi[posto] = null;
+						this.attrezzi[i] = null;
 						this.numeroAttrezzi--;
 					}
-					posto++;
+					i++;
 				}
 			}
 			return true;

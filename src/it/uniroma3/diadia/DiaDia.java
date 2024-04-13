@@ -38,7 +38,7 @@ public class DiaDia {
 
 	public void gioca() {
 		String istruzione; 
-		Scanner scannerDiLinee;
+		//Scanner scannerDiLinee;
 
 		IO.mostraMessaggio(MESSAGGIO_BENVENUTO);
 		IO.mostraMessaggio("\n"+partita.getStanzaCorrente().getDescrizione());		
@@ -68,6 +68,10 @@ public class DiaDia {
 				IO.mostraMessaggio(istruzione);
 				this.fine();
 			}
+			if (this.partita.vinta()) {
+				IO.mostraMessaggio("\nHAI VINTO!");
+				return true;
+			} 
 			return false;
 		}			
 		else if (comandoDaEseguire.getNome().equals("aiuto")) {
@@ -86,7 +90,7 @@ public class DiaDia {
 			IO.mostraMessaggio("Comando sconosciuto");
 		
 		if (this.partita.vinta()) {
-			IO.mostraMessaggio("Hai vinto!");
+			IO.mostraMessaggio("\nHAI VINTO!");
 			return true;
 		} else
 			return false;
