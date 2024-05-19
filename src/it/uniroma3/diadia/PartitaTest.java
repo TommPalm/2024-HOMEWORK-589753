@@ -1,14 +1,26 @@
 package it.uniroma3.diadia;
 import static org.junit.Assert.*;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 public class PartitaTest {
 
-	private Partita partita = new Partita();
+	private Partita partita;
 	
+	@Before
+	public void setTest() {
+		Labirinto lab = new LabirintoBuilder()
+				.addStanzaIniziale("inizio")
+				.addStanzaVincente("vince")
+				.addAdiacenza("inizio", "vince", "nord")
+				.getLabirinto();
+		partita = new Partita(lab);
+	}
 	
 	@Test
 	public void testIsFinita_comandoFine() {

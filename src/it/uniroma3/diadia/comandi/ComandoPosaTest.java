@@ -1,6 +1,8 @@
 package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -15,8 +17,11 @@ public class ComandoPosaTest {
 	@Before
 	public void setTest() {
 		att = new Attrezzo("a",1);
-		play = new Partita();
 		posa = new ComandoPosa();
+		Labirinto lab = new LabirintoBuilder()
+				.addStanzaIniziale("inizio")
+				.getLabirinto();
+		play = new Partita(lab);
 	}
 
 	@Test

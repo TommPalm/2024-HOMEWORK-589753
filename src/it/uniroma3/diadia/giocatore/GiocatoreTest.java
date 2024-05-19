@@ -9,21 +9,18 @@ public class GiocatoreTest {
 	
 	
 	@Test
-	public void testGetCFU_partenza() {
-		player.crea();		 
+	public void testGetCFU_partenza() {	 
 		assertEquals(20,player.getCFU());
 	}
 
 	@Test
-	public void testGetCFU_attualiGiusti() {
-		player.crea();		
+	public void testGetCFU_attualiGiusti() {	
 		player.setCFU(9);
 		assertEquals(9,player.getCFU());
 	}
 	
 	@Test
 	public void testGetCFU_attualiErrati() {
-		player.crea();	
 		player.setCFU(3);
 		assertNotEquals(20,player.getCFU());
 	}

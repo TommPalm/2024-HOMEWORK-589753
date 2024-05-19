@@ -17,12 +17,26 @@ public class Partita {
 	private boolean finita;
 	
 	
-	public Partita(){
-		labirinto = new Labirinto();	
-		labirinto.costruisci();
+	public Partita(Labirinto lab){
+		this.labirinto = lab;	
 		giocatore = new Giocatore();
-		giocatore.crea();
 		this.finita = false;
+	}
+	
+	public void setLabirinto (Labirinto lab) {
+		this.labirinto = lab;
+	}
+	
+	public Labirinto getLabirinto() {
+		return this.labirinto;
+	}
+	
+	public void setGiocatore(Giocatore player) {
+		this.giocatore = player;
+	}
+	
+	public Giocatore getGiocatore() {
+		return this.giocatore;
 	}
  
 

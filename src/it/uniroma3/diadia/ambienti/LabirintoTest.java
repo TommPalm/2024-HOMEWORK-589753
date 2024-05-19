@@ -10,14 +10,12 @@ public class LabirintoTest {
 	
 	@Test
 	public void testGetCorrente_StanzaNonPresente() {
-		lab.costruisci();
 		Stanza stanza = new Stanza("non presente");
 		assertNotEquals(lab.getCorrente(),stanza);
 	}
 	
 	@Test
 	public void testGetCorrente_StanzaPresenteCorrente() {
-		lab.costruisci();
 		Stanza stanza = new Stanza("corrente");
 		lab.setStanzaCorrente(stanza);
 		assertEquals(lab.getCorrente(),stanza);
@@ -25,7 +23,6 @@ public class LabirintoTest {
 	
 	@Test
 	public void testGetCorrente_StanzaPresenteNonCorrente() {
-		lab.costruisci();
 		Stanza stanza = new Stanza("non corrente");
 		assertNotEquals(lab.getCorrente(),stanza);
 	}

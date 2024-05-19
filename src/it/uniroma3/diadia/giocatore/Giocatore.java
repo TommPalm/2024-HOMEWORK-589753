@@ -7,7 +7,7 @@ public class Giocatore {
 	private int cfu;
 	private Borsa borsa;
 	
-	public void crea() {
+	public Giocatore() {
 		this.cfu = CFU_INIZIALI;
 		borsa= new Borsa();
 	}

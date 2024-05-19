@@ -10,35 +10,27 @@ import org.junit.Test;
 
 public class StanzaBloccataTest {
 
-	private Stanza room;
-	private Stanza ad;
+	private StanzaBloccata bloccata;
 	private Attrezzo chiave;
-	private Partita play = new Partita();
-	private Comando vai;
+	private Stanza adiacente;
 	
 	@Before
 	public void setTest() {
-		room = new StanzaBloccata("bloccata","nord","osso");
-		ad = new Stanza("adiacente");
-		chiave = new Attrezzo("osso",1);
-		room.impostaStanzaAdiacente("nord",ad);
-		play.labirinto.setStanzaCorrente(room);
-		vai = new ComandoVai();
+		chiave = new Attrezzo("chiave",0);
+		bloccata = new StanzaBloccata("bloccata", "nord", "chiave");
+		adiacente = new Stanza("adiacente");
+		bloccata.impostaStanzaAdiacente("nord", adiacente);
 	}
 	
 	@Test
 	public void testGetStanzaAdiacente_conChiave() {
-		room.addAttrezzo(chiave);
-		vai.setParametro("nord");
-		vai.esegui(play);
-		assertEquals(play.getStanzaCorrente(),ad);
+		bloccata.addAttrezzo(chiave);
+		assertEquals(adiacente,bloccata.getStanzaAdiacente("nord"));
 	}
 	
 	@Test
 	public void testGetStanzaAdiacente_senzaChiave() {
-		vai.setParametro("nord");
-		vai.esegui(play);
-		assertNotEquals(play.getStanzaCorrente(),ad);
+		assertEquals(bloccata,bloccata.getStanzaAdiacente("nord"));
 	}
 
 }
