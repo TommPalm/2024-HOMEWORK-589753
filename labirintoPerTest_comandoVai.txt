@@ -1,0 +1,11 @@
+Stanze:iniziale,adiacente
+Magica:
+Buia:
+Bloccata:
+Inizio:iniziale
+Vincente:adiacente
+Mago:
+Cane:
+Strega:
+Attrezzi:
+Uscite:iniziale nord adiacente

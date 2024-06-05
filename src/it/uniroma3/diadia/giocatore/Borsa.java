@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -61,9 +60,9 @@ public class Borsa {
 	public Attrezzo removeAttrezzo(String nomeAttrezzo) {
 		
 		if(this.attrezzi.containsKey(nomeAttrezzo)) {
+			this.pesoAttuale -= this.attrezzi.get(nomeAttrezzo).getPeso();
 			return this.attrezzi.remove(nomeAttrezzo);
 		}
-		
 		else return null;
 	}
 

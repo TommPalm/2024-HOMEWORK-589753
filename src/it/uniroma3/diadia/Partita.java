@@ -59,7 +59,7 @@ public class Partita {
 	 * @return vero se partita finita
 	 */
 	public boolean isFinita() {
-		return (finita || vinta() || (giocatore.getCFU() == 0));
+		return (finita || this.vinta() || (giocatore.getCFU() == 0));
 	}
 	/**
 	 * Imposta la partita come finita
@@ -70,7 +70,7 @@ public class Partita {
 	}
 	
 	public boolean giocatoreIsVivo() {
-		if(giocatore.getCFU()==0) {
+		if(giocatore.getCFU()<=0) {
 			return false;
 		}
 		return true;

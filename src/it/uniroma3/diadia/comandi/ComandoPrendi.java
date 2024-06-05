@@ -4,7 +4,7 @@ import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-public class ComandoPrendi implements Comando{
+public class ComandoPrendi extends AbstractComando{
 
 	private IOConsole IO = new IOConsole();
 	private String att;
@@ -19,13 +19,14 @@ public class ComandoPrendi implements Comando{
 			IO.mostraMessaggio("attrezzo inesistente");
 		}
 		else {
-			if(partita.giocatore.raccogli(a))
+			if(partita.giocatore.raccogli(a)) {
 				IO.mostraMessaggio("\nraccolto "+ partita.getStanzaCorrente().getAttrezzo(a.getNome()));
+				partita.getStanzaCorrente().removeAttrezzo(a);
+			}
 			else
 				IO.mostraMessaggio("\nimpossibile raccogliere");
-			partita.getStanzaCorrente().removeAttrezzo(a);
 		}
-	//	IO.mostraMessaggio("\n"+partita.getStanzaCorrente().getDescrizione());
+		IO.mostraMessaggio("\n"+partita.getStanzaCorrente().getDescrizione());
 	}
 	
 	public void setParametro(String attrezzo) {

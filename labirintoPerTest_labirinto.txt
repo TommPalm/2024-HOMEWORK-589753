@@ -1,0 +1,11 @@
+Stanze:corrente,vincente
+Magica:
+Buia:
+Bloccata:
+Inizio:corrente
+Vincente:vincente
+Mago:
+Cane:
+Strega:
+Attrezzi:
+Uscite:

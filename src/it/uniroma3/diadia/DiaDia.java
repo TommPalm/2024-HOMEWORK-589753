@@ -2,7 +2,12 @@ package it.uniroma3.diadia;
 
 //import java.util.Scanner;
 import it.uniroma3.diadia.comandi.Comando;
-import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
+//import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
+import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import it.uniroma3.diadia.ambienti.*;
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -27,40 +32,44 @@ public class DiaDia{
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.\n"+
 			"PER USARE GLI OGGETTI, VANNO POSATI NELLA STANZA";
-	
 
+	private List<String> elencoComandi = new ArrayList<>();
+	static final private String[] cmd = {"vai","aiuto","fine","prendi","posa","guarda","interagisci","saluta","regala"};
 	private Partita partita;
 	private IO IO;
 
 	public DiaDia(Labirinto labirinto,IO io) {
 		this.partita = new Partita(labirinto);
 		this.IO = io;
+		for(int i=0; i<9;i++) {
+			elencoComandi.add(cmd[i]);
+		}
 	}
 
-	public void gioca() {
+	public void gioca() throws Exception {
 		String istruzione; 
-		//Scanner scannerDiLinee;
-		
+
 		IO.mostraMessaggio(MESSAGGIO_BENVENUTO);
-	
+
 		do		
 			istruzione = IO.leggiRiga();
 		while (!processaIstruzione(istruzione));
-		
-		//scannerDiLinee.close();
 	}   
 
 	/**
 	 * Processa una istruzione 
 	 *
 	 * @return true se l'istruzione e' eseguita e il gioco continua, false altrimenti
+	 * @throws Exception 
 	 */
-	private boolean processaIstruzione(String istruzione) {
+	private boolean processaIstruzione(String istruzione) throws Exception {
 		Comando comandoDaEseguire;
-		FabbricaDiComandiFisarmonica factory = new FabbricaDiComandiFisarmonica();
+		FabbricaDiComandiRiflessiva factory = new FabbricaDiComandiRiflessiva(IO, elencoComandi);
+		//		FabbricaDiComandiFisarmonica factory = new FabbricaDiComandiFisarmonica();	
 		comandoDaEseguire = factory.costruisciComando(istruzione);
-		comandoDaEseguire.esegui(this.partita);
-		
+		if(comandoDaEseguire!=null)
+			comandoDaEseguire.esegui(this.partita);
+
 		if (this.partita.vinta())
 			IO.mostraMessaggio("Hai vinto!");
 		if (!this.partita.giocatoreIsVivo())
@@ -69,16 +78,18 @@ public class DiaDia{
 		return this.partita.isFinita();
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
+
 		IO io = new IOConsole();
-		Labirinto labirinto = new LabirintoBuilder()
+		Labirinto labirinto = Labirinto.newBuilder("labirinto1.txt").getLabirinto();
+		/*Labirinto labirinto = new LabirintoBuilder()
 				.addStanzaIniziale("Atrio")
+				.addAttrezzo("osso", 7)
 				.addStanzaVincente("Biblioteca")
 				.addStanza("Aula N11")
 				.addAttrezzo("lanterna", 5)
-				.addStanzaBloccata("Corridoio","nord", "tesserino")
+				.addStanzaBloccata("Corridoio","nord", "bacchetta")
 				.addStanzaBuia("Laboratorio Campus", "lanterna")
-				.addAttrezzo("tesserino", 0)
 				.addStanzaBuia("Aula N10", "lanterna")
 				//adiacenze
 				.addAdiacenza("Corridoio", "Biblioteca", "nord")
@@ -95,12 +106,16 @@ public class DiaDia{
 				.addAdiacenza("Atrio","Aula N11" ,"est" )
 				.addAdiacenza("Atrio","Laboratorio Campus" ,"sud" )
 				.addAdiacenza("Atrio","Aula N10" ,"ovest" )
+				//NPC
+				.addMAGO("merlino", " posso aiutarti, fidati", "bacchetta", 1)
 				.getLabirinto();
-		
-		DiaDia gioco = new DiaDia(labirinto,io);
+		 */
+
+		DiaDia gioco = new DiaDia(labirinto, io);
+		gioco = new DiaDia(labirinto,io);
 		gioco.gioca();
 	}
 
-	
-	
+
+
 }
